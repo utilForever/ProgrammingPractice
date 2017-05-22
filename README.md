@@ -8,6 +8,10 @@
 
 - [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%201.md)
 
+### Part 2 - 무기, 방어구 만들기 (Make Weapon, Armor)
+
+- [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%202.md)
+
 ## 성적 관리 시스템 (Grade Management System)
 
 ### Part 1 - 5명의 성적 관리하기 (Manage grade of 5 Students)
