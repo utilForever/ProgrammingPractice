@@ -12,6 +12,18 @@
 
 - Part 1 - 5명의 성적 관리하기 (Manage grade of 5 Students) : [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Grade%20Management%20System/Grade%20Management%20System%2C%20Part%201.md)
 
+## 풀이 제출 방법
+
+과제를 해결한 뒤 코드를 제출하시면 간단히 코드에 대한 리뷰를 해드립니다. 풀이를 제출하실 때는 프로젝트 관련 파일을 제외한 소스 파일만 ```Pull Request```로 제출하시면 됩니다.
+
+주의하실 점은 소스 파일을 ```Solutions/(본인 닉네임)/(과제 제목)/(파트 번호)```에 넣어서 제출해야 된다는 점입니다.
+
+이를 지키지 않은 Pull Request에 대해서는 리뷰를 해드리지 않습니다. 이 규칙을 반드시 지켜주시기 바랍니다.
+
+제가 리뷰해드릴 수 있는 언어는 C, C++, C#, Java 등이 있습니다. 하지만 다른 언어로 제출하신다면 공부해서라도 리뷰해드릴 예정입니다.
+
+시간이 많지 않아 빠른 속도로 해드릴 수는 없겠지만, 여러분에게 도움이 될 수 있도록 최대한 노력해 볼 생각입니다.
+
 ## How To Contribute
 
 Contributions are always welcome, either reporting issues/bugs or forking the repository and then issuing pull requests when you have completed some additional coding that you feel will be beneficial to the main project. If you are interested in contributing in a more dedicated capacity, then please contact me.
