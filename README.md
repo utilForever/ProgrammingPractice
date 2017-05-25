@@ -4,19 +4,13 @@
 
 ## 게임 상점 (Game Shop)
 
-### Part 1 - 간단한 아이템 만들기 (Make Simple Item)
+- Part 1 - 간단한 아이템 만들기 (Make Simple Item) : [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%201.md)
 
-- [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%201.md)
-
-### Part 2 - 무기, 방어구 만들기 (Make Weapon, Armor)
-
-- [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%202.md)
+- Part 2 - 무기, 방어구 만들기 (Make Weapon, Armor) : [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%202.md)
 
 ## 성적 관리 시스템 (Grade Management System)
 
-### Part 1 - 5명의 성적 관리하기 (Manage grade of 5 Students)
-
-- [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Grade%20Management%20System/Grade%20Management%20System%2C%20Part%201.md)
+- Part 1 - 5명의 성적 관리하기 (Manage grade of 5 Students) : [문제](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Grade%20Management%20System/Grade%20Management%20System%2C%20Part%201.md)
 
 ## How To Contribute
 
