@@ -28,6 +28,10 @@
 
 시간이 많지 않아 빠른 속도로 해드릴 수는 없겠지만, 여러분에게 도움이 될 수 있도록 최대한 노력해 볼 생각입니다.
 
+## Github Pull Request 사용하기
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/v8GyZ6HK8rVPdK" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/jungseobshin/github-pull-request" title="GitHub Pull Request 간단 사용 설명서" target="_blank">GitHub Pull Request 간단 사용 설명서</a> </strong> from <strong><a target="_blank" href="https://www.slideshare.net/jungseobshin">jungseob shin</a></strong> </div>
+
 ## How To Contribute
 
 Contributions are always welcome, either reporting issues/bugs or forking the repository and then issuing pull requests when you have completed some additional coding that you feel will be beneficial to the main project. If you are interested in contributing in a more dedicated capacity, then please contact me.
