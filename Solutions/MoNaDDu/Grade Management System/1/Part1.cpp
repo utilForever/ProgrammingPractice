@@ -207,19 +207,21 @@ private:
 		vector<unsigned int> ranks;
 
 		for (const auto& student : students)
-		{
-			ranks.emplace_back(1u + count_if(cbegin(students), cend(students), [&student](const auto& e) {
-				return student->sum < e->sum;
-			}));
-		}
+			ranks.emplace_back(GetRank(student));
 
 		return ranks;
+	}
+	
+	unsigned int GetRank(const StudentPtr& student) const
+	{
+		return 1u + count_if(cbegin(students), cend(students), [&student](const auto& e) { return student->sum < e->sum; });
 	}
 
 	streamsize CalStreamSize(const string& title) const
 	{
 		return title.size() + 5u;
 	}
+
 };
 
 const string Students::name = "Name";
