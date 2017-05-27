@@ -1,0 +1,34 @@
+{
+  "name": "game-shop",
+  "version": "1.0.0",
+  "description": "Game shop",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && mocha",
+    "fix": "standard --fix",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuRyes/ProgrammingPractice.git"
+  },
+  "keywords": [
+    "shop"
+  ],
+  "author": "MuRye",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MuRyes/ProgrammingPractice/issues"
+  },
+  "homepage": "https://github.com/MuRyes/ProgrammingPractice#readme",
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "mocha": "^3.4.2",
+    "standard": "^10.0.2"
+  },
+  "standard": {
+    "ignore": [
+      "test.js"
+    ]
+  }
+}
