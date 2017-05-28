@@ -14,12 +14,9 @@ public class Weapon extends Item
         this.damage = damagePm;
     }
 
-    public void Describe()
+    public void describe()
     {
-        System.out.println("Name        = " + this.name);
-        System.out.println("Description = " + this.description);
-        System.out.println("Weight      = " + this.weight + " lbs");
-        System.out.println("Value       = " + this.value + " gold coins");
+        super.describe();
         System.out.println("Damage      = " + this.damage);
         System.out.println();
     }

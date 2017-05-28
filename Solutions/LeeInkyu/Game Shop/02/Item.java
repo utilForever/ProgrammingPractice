@@ -15,12 +15,11 @@ public class Item {
         this.value = valuePm;
     }
 
-    public void Describe()
+    public void describe()
     {
         System.out.println("Name        = " + this.name);
         System.out.println("Description = " + this.description);
         System.out.println("Weight      = " + this.weight + " lbs");
         System.out.println("Value       = " + this.value + " gold coins");
-        System.out.println();
     }
 }
