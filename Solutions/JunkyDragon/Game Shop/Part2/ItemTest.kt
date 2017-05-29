@@ -5,11 +5,11 @@ package org.junkydragon.item
  */
 
 fun main(args: Array<String>) {
-    val item : Item = Item("Armor", "armor", 100.0, 20)
-    item.About()
-    val armor : Item = Armor("Steel Armor", "Armor that made by Steel", 100.0, 20, 50)
-    armor.About()
-    val weapon : Weapon = Weapon("Steel Sword", "Sword that made by Steel", 100.0, 20, 50)
-    weapon.About()
-
+    val i : Item = Item("Armor", "armor", 100.0, 20)
+    i.About()
+    val a : Item = Armor("Steel Armor", "Armor that made by Steel", 100.0, 20, 50)
+    a.About()
+    val w : Weapon = Weapon("Steel Sword", "Sword that made by Steel", 100.0, 20, 50)
+    w.About()
+    val ia : Array<Item> = arrayOf(Armor("Steel Armor", "Armor that made by Steel", 100.0, 20, 50), Weapon("Steel Sword", "Sword that made by Steel", 100.0, 20, 50))
 }

@@ -12,8 +12,3 @@ open class Item(val name: String, val description: String, val weight: Double, v
         println("Value\t\t\t= $value")
     }
 }
-
-//fun main(args: Array<String>) {
-//    val item = Item("Excalibur", "The legendary sword of King Arthur", 12.0, 1024)
-//    item.About()
-//}

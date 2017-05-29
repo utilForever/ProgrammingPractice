@@ -7,10 +7,7 @@ package org.junkydragon.item
 class Armor(name: String, description: String, weight: Double, value: Int, val defence: Int) : Item(name, description, weight, value){
 
     override fun About() {
-        println("Name\t\t\t= $name")
-        println("Description\t\t= $description")
-        println("Weight\t\t\t= $weight")
-        println("Value\t\t\t= $value")
+        super.About()
         println("Defence\t\t\t= $defence")
     }
 }
