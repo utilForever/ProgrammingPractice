@@ -24,11 +24,7 @@ public class Armor extends Item {
 	}
 	
 	public void describe(){
-		System.out.println("Name          = " + super.name);
-		System.out.println("Description = " + super.description);
-		System.out.println("Weight        = " + super.weight + " lbs");
-		System.out.println("Value           = " + super.value + " gold coins");
+		super.describe();
 		System.out.println("Defence       = " + this.defence);
-		System.out.println();
 	}
 }

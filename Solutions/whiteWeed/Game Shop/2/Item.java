@@ -28,9 +28,8 @@ public class Item {
 	
 	public void describe(){
 		System.out.println("Name          = " + this.name);
-		System.out.println("Description = " + this.description);
+		System.out.println("Description   = " + this.description);
 		System.out.println("Weight        = " + this.weight + " lbs");
-		System.out.println("Value           = " + this.value + " gold coins");
-		System.out.println();
+		System.out.println("Value         = " + this.value + " gold coins");
 	}
 }

@@ -24,6 +24,7 @@ public class ItemTest2 {
 		
 		for(Item item : items){
 			item.describe();
+			System.out.println();
 		}
 	}
 }

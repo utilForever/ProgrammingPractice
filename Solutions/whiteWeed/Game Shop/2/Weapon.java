@@ -24,11 +24,7 @@ public class Weapon extends Item {
 	}
 	
 	public void describe(){
-		System.out.println("Name          = " + super.name);
-		System.out.println("Description = " + super.description);
-		System.out.println("Weight        = " + super.weight + " lbs");
-		System.out.println("Value           = " + super.value + " gold coins");
-		System.out.println("Damage      = " + this.damage);
-		System.out.println();
+		super.describe();
+		System.out.println("Damage        = " + this.damage);
 	}
 }
