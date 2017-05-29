@@ -1,15 +1,17 @@
 #include "Item.h"
 
-Item::Item() {}
-
-Item::~Item() {}
-
-Item::Item(std::string name, std::string description, int weight, int value)
+Item::Item() 
 {
-	this->name = name;
-	this->description = description;
-	this->weight = weight;
-	this->value = value;
+}
+
+Item::~Item() 
+{
+}
+
+
+Item::Item(std::string name, std::string description, int weight, int value) 
+	: name(name), description(description), weight(weight), value(value) 
+{
 }
 
 void Item::Describe()
