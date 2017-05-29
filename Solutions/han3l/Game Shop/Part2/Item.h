@@ -6,7 +6,7 @@ class Item
 {
 public:
 	Item();
-	~Item();
+	virtual ~Item();
 	Item(std::string name, std::string description, int weight, int value);
 	virtual void Describe();
 protected:
