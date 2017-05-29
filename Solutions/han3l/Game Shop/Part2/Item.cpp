@@ -41,19 +41,13 @@ void Item::Describe()
 }
 
 void Weapon::Describe()
-{
-	std::cout << "Name\t\t= " << this->name << std::endl;
-	std::cout << "Description\t= " << this->description << std::endl;
-	std::cout << "Weight\t\t= " << this->weight << " lbs" << std::endl;
-	std::cout << "Value\t\t= " << this->value << " gold coins" << std::endl;
+{	
+	Item::Describe();
 	std::cout << "Damage\t\t= " << this->damage << std::endl << std::endl;
 }
 
 void Amor::Describe()
 {
-	std::cout << "Name\t\t= " << this->name << std::endl;
-	std::cout << "Description\t= " << this->description << std::endl;
-	std::cout << "Weight\t\t= " << this->weight << " lbs" << std::endl;
-	std::cout << "Value\t\t= " << this->value << " gold coins" << std::endl;
+	Item::Describe();
 	std::cout << "Defense\t\t= " << this->defense << std::endl << std::endl;
 }
