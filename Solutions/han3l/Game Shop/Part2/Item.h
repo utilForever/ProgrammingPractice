@@ -27,12 +27,12 @@ private:
 	int damage;
 };
 
-class Amor : public Item
+class Armor : public Item
 {
 public:
-	Amor();
-	~Amor();
-	Amor(std::string name, std::string description, int weight, int value, int defense);
+	Armor();
+	~Armor();
+	Armor(std::string name, std::string description, int weight, int value, int defense);
 	void Describe();
 private:
 	int defense;
