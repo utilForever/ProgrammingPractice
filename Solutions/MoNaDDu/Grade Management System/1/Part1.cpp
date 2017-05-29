@@ -6,6 +6,8 @@
 #include <memory>
 #include <functional>
 #include <algorithm>
+#include <numeric>
+#include <iterator>
 
 using namespace std;
 
@@ -15,42 +17,54 @@ class Students;
 using StudentPtr = shared_ptr<Student>;
 using StudentsPtr = shared_ptr<Students>;
 
-class Student
+class Student final
 {
 	friend class Students;
-	friend ostream& operator<<(ostream& os, Student student)
-	{
-		return os << left << setw(12) << student.name
-			<< setw(5) << +student.korean_score
-			<< setw(5) << +student.english_score
-			<< setw(6) << +student.math_score
-			<< setw(5) << student.sum
-			<< setw(5) << fixed << setprecision(1) << student.average;
-	}
-
-	friend ostream& operator<<(ostream& os, Student* student)
-	{
-		return os << *student;
-	}
 
 public:
 	Student(const string& name, const unsigned char korean_score, const unsigned char english_score, const unsigned char math_score)
-		: name(name), korean_score(korean_score), english_score(english_score), math_score(math_score),
+		: name(name), scores({ korean_score, english_score, math_score }),
 		sum(korean_score + english_score + math_score), average(sum / 3.0f)
 	{
 
 	}
 
+	Student(const string& name, initializer_list<unsigned char> scores)
+		: name(name), scores(scores),
+		sum(accumulate(cbegin(scores), cend(scores), 0)), average(sum / static_cast<float>(this->scores.size()))
+	{
+
+	}
+
+	Student(const string& name, const vector<unsigned char>& scores)
+		: name(name), scores(scores),
+		sum(accumulate(cbegin(scores), cend(scores), 0)), average(sum / static_cast<float>(this->scores.size()))
+	{
+
+	}
+
+	Student(const string& name, vector<unsigned char>&& scores)
+		: name(name), scores(move(scores)),
+		sum(accumulate(cbegin(scores), cend(scores), 0)), average(sum / static_cast<float>(this->scores.size()))
+	{
+
+	}
+
+	~Student() = default;
+
+	void ForEachAboutScores(function<void(unsigned char)> Func) const
+	{
+		for_each(cbegin(scores), cend(scores), Func);
+	}
+
 private:
 	const string name;
-	const unsigned char korean_score;
-	const unsigned char english_score;
-	const unsigned char math_score;
+	const vector<unsigned char> scores;
 	const short sum;
 	const float average;
 };
 
-class Students : public enable_shared_from_this<Students>
+class Students final : public enable_shared_from_this<Students>
 {
 public:
 	Students() = default;
@@ -63,6 +77,9 @@ public:
 
 	StudentsPtr PushBack(StudentPtr student)
 	{
+		if (student->scores.size() != subject_names.size())
+			throw logic_error("학생 정보 등록 에러: 학생의 과목 정보 수와 과목 이름 수가 일치하지 않음.");
+
 		students.push_back(student);
 
 		return shared_from_this();
@@ -71,21 +88,13 @@ public:
 	StudentsPtr PrintScoreTable(void)
 	{
 		auto header{ MakeHeader() };
-		
-		cout << header << endl;
-		PrintLine(header.size());
 
-		auto rank_list{ MakeRankList() };
-
-		for (auto i = 0u; i < students.size(); ++i)
-		{
-			PrintStudentInformation(students[i]);
-			cout << setw(CalStreamSize(rank)) << rank_list[i] << endl;
-		}
-	
+		PrintHeader(header);
 		PrintLine(header.size());
-		PrintTotalSums();
-		PrintTotalAverages();
+		PrintStudentsInformation();
+		PrintLine(header.size());
+		PrintTotalSumsInformation();
+		PrintTotalAveragesInformation();
 
 		return shared_from_this();
 	}
@@ -93,154 +102,153 @@ public:
 private:
 	vector<StudentPtr> students;
 	static const string name;
-	static const string kor;
-	static const string eng;
-	static const string math;
+	static const vector<string> subject_names;
 	static const string sum;
 	static const string avg;
 	static const string rank;
-	static const streamsize name_size = 12ll;
+	static const streamsize name_size{ 12ll };
+	static const streamsize added_size{ 5ll };
 
 	string MakeHeader(void) const
 	{
 		stringstream ss;
-		ss << left << setw(name_size) << name
-			<< setw(CalStreamSize(kor)) << kor
-			<< setw(CalStreamSize(eng)) << eng
-			<< setw(CalStreamSize(math)) << math
-			<< setw(CalStreamSize(sum)) << sum
+
+		ss << left << setw(name_size) << name;
+		ForEach(subject_names, [&ss, this](const string& subject_name) { ss << setw(CalStreamSize(subject_name)) << subject_name; });
+		ss << setw(CalStreamSize(sum)) << sum
 			<< setw(CalStreamSize(avg)) << avg
 			<< rank;
 
 		return ss.str();
 	}
 
+	inline void PrintHeader(const string& header) const
+	{
+		cout << header << endl;
+	}
+
 	void PrintLine(const unsigned int n) const
 	{
-		for (auto i = 0u; i < n; ++i)
-			cout << "=";
+		fill_n(ostream_iterator<char>(cout), n, '=');
 		cout << endl;
+	}
+
+	void PrintStudentsInformation(void) const
+	{
+		ForEach(students, bind(&Students::PrintStudentInformation, this, placeholders::_1));
 	}
 
 	void PrintStudentInformation(const StudentPtr& student) const
 	{
-		cout << left << setw(name_size) << student->name
-			<< setw(CalStreamSize(kor)) << +student->korean_score
-			<< setw(CalStreamSize(eng)) << +student->english_score
-			<< setw(CalStreamSize(math)) << +student->math_score
-			<< setw(CalStreamSize(sum)) << student->sum
-			<< setw(CalStreamSize(avg)) << fixed << setprecision(1ll) << student->average;
+		cout << left << setw(name_size) << student->name;
+		PrintStudentScores(student);
+		cout << setw(CalStreamSize(sum)) << student->sum
+			<< setw(CalStreamSize(avg)) << fixed << setprecision(1ll) << student->average
+			<< setw(CalStreamSize(rank)) << GetRank(student) << endl;
 	}
 
-	void PrintTotalSums(void) const
+	void PrintStudentScores(const StudentPtr& student, const unsigned int index = 0u) const
 	{
-		cout << left << setw(name_size) << sum
-			<< setw(CalStreamSize(kor)) << SumOfKoreanScores()
-			<< setw(CalStreamSize(eng)) << SumOfEnglishScores()
-			<< setw(CalStreamSize(math)) << SumOfMathScores()
-			<< setw(CalStreamSize(sum)) << SumOfTotalScores()
-			<< endl;
+		if (index == subject_names.size())
+			return;
+
+		cout << setw(CalStreamSize(subject_names[index])) << +student->scores[index];
+
+		PrintStudentScores(student, index + 1);
 	}
 
-	void PrintTotalAverages(void) const
-	{
-		cout << left << setw(name_size) << avg
-			<< setw(CalStreamSize(kor)) << AverageOfKoreanScores()
-			<< setw(CalStreamSize(eng)) << AverageOfEnglishScores()
-			<< setw(CalStreamSize(math)) << AverageOfMathScores()
-			<< setw(CalStreamSize(sum)) << AverageOfTotalScores()
-			<< endl;
-	}
-
-	float AverageOfKoreanScores(void) const
-	{
-		return static_cast<float>(SumOfKoreanScores()) / students.size();
-	}
-
-	float AverageOfEnglishScores(void) const
-	{
-		return static_cast<float>(SumOfEnglishScores()) / students.size();
-	}
-
-	float AverageOfMathScores(void) const
-	{
-		return static_cast<float>(SumOfMathScores()) / students.size();
-	}
-
-	float AverageOfTotalScores(void) const
-	{
-		return static_cast<float>(SumOfTotalScores()) / students.size() / 3.0f;
-	}
-
-	int SumOfKoreanScores(void) const
-	{
-		return ForEachForSum([](const auto& student) { return student->korean_score; });
-	}
-
-	int SumOfEnglishScores(void) const
-	{
-		return ForEachForSum([](const auto& student) { return student->english_score; });
-	}
-
-	int SumOfMathScores(void) const
-	{
-		return ForEachForSum([](const auto& student) { return student->math_score; });
-	}
-	
-	int SumOfTotalScores(void) const
-	{
-		return ForEachForSum([](const auto& student) { return student->sum; });
-	}
-
-	int ForEachForSum(function<int(const StudentPtr&)> Func) const
-	{
-		auto sum{ 0 };
-
-		for (const auto& student : students)
-			sum += Func(student);
-
-		return sum;
-	}
-
-	vector<unsigned int> MakeRankList(void) const
-	{
-		vector<unsigned int> ranks;
-
-		for (const auto& student : students)
-			ranks.emplace_back(GetRank(student));
-
-		return ranks;
-	}
-	
 	unsigned int GetRank(const StudentPtr& student) const
 	{
 		return 1u + count_if(cbegin(students), cend(students), [&student](const auto& e) { return student->sum < e->sum; });
 	}
 
-	streamsize CalStreamSize(const string& title) const
+	void PrintTotalSumsInformation(void) const
 	{
-		return title.size() + 5u;
+		cout << left << setw(name_size) << sum;
+		PrintTotalSums();
+		cout << setw(CalStreamSize(sum)) << SumOfTotalScores() << endl;
 	}
 
+	void PrintTotalSums(const unsigned int index = 0u) const
+	{
+		if (index == subject_names.size())
+			return;
+
+		cout << setw(CalStreamSize(subject_names[index]))
+			<< ForEachAboutSum([index](const auto& student) { return student->scores[index]; });
+
+		PrintTotalSums(index + 1);
+	}
+
+	int SumOfTotalScores(void) const
+	{
+		return ForEachAboutSum([](const auto& student) { return student->sum; });
+	}
+
+	void PrintTotalAveragesInformation(void) const
+	{
+		cout << left << setw(name_size) << avg;
+		PrintTotalAverages();
+		cout << setw(CalStreamSize(sum)) << AverageOfTotalScores()
+			<< endl;
+	}
+
+	void PrintTotalAverages(const unsigned int number_of_subjects = 0u) const
+	{
+		if (number_of_subjects == subject_names.size())
+			return;
+
+		cout << setw(CalStreamSize(subject_names[number_of_subjects]))
+			<< ForEachAboutSum([number_of_subjects](const auto& student) { return student->scores[number_of_subjects]; }) / static_cast<float>(students.size());
+
+		PrintTotalAverages(number_of_subjects + 1);
+	}
+
+	float AverageOfTotalScores(void) const
+	{
+		return static_cast<float>(SumOfTotalScores()) / students.size() / subject_names.size();
+	}
+
+	template<typename T>
+	void ForEach(const T& list, function<void(const typename T::value_type&)> Func) const
+	{
+		for_each(cbegin(list), cend(list), Func);
+	}
+
+	int ForEachAboutSum(function<int(const StudentPtr&)> Func) const
+	{
+		return accumulate(cbegin(students), cend(students), 0, [&Func](const int acc, const auto& student) { return acc + Func(student); });
+	}
+
+	streamsize CalStreamSize(const string& title) const
+	{
+		return title.size() + added_size;
+	}
 };
 
-const string Students::name = "Name";
-const string Students::kor = "Kor";
-const string Students::eng = "Eng";
-const string Students::math = "Math";
-const string Students::sum = "Sum";
-const string Students::avg = "Avg";
-const string Students::rank = "Rank";
+const string Students::name{ "Name"s };
+const vector<string> Students::subject_names{ "Kor"s, "Eng"s, "Math"s };
+const string Students::sum{ "Sum"s };
+const string Students::avg{ "Avg"s };
+const string Students::rank{ "Rank"s };
 
 int main()
 {
-	Students::MakeInstance()
-		->PushBack(make_shared<Student>("John"s, 96, 92, 98))
-		->PushBack(make_shared<Student>("Chris"s, 88, 90, 68))
-		->PushBack(make_shared<Student>("James"s, 98, 80, 75))
-		->PushBack(make_shared<Student>("Tom"s, 64, 70, 72))
-		->PushBack(make_shared<Student>("Jane"s, 80, 88, 94))
-		->PrintScoreTable();
+	try
+	{
+		Students::MakeInstance()
+			->PushBack(make_shared<Student>("John"s, 96, 92, 98))
+			->PushBack(make_shared<Student>("Chris"s, 88, 90, 68))
+			->PushBack(make_shared<Student>("James"s, 98, 80, 75))
+			->PushBack(make_shared<Student>("Tom"s, 64, 70, 72))
+			->PushBack(make_shared<Student>("Jane"s, 80, 88, 94))
+			->PrintScoreTable();
+	}
+	catch (const exception& e)
+	{
+		cerr << e.what() << endl;
+	}
+
 
 	return 0;
 }
