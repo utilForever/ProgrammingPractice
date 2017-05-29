@@ -22,11 +22,11 @@ Weapon::Weapon(std::string name, std::string description, int weight, int value,
 	this->damage = damage;
 }
 
-Amor::Amor() {}
+Armor::Armor() {}
 
-Amor::~Amor() {}
+Armor::~Armor() {}
 
-Amor::Amor(std::string name, std::string description, int weight, int value, int defense)
+Armor::Armor(std::string name, std::string description, int weight, int value, int defense)
 	: Item(name, description, weight, value)
 {
 	this->defense = defense;
@@ -46,7 +46,7 @@ void Weapon::Describe()
 	std::cout << "Damage\t\t= " << this->damage << std::endl << std::endl;
 }
 
-void Amor::Describe()
+void Armor::Describe()
 {
 	Item::Describe();
 	std::cout << "Defense\t\t= " << this->defense << std::endl << std::endl;
