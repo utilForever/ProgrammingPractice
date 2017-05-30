@@ -6,9 +6,9 @@
 
 - [Part 1 - 간단한 아이템 만들기 (Make Simple Item)](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%201.md)
 
-- [Part 2 - 무기, 방어구 만들기 (Make Weapon, Armor](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%202.md)
+- [Part 2 - 무기, 방어구 만들기 (Make Weapon, Armor)](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%202.md)
 
-- [Part 3 - 포션, 상점 만들기 (Make Potion, Shop](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%203.md)
+- [Part 3 - 포션, 상점 만들기 (Make Potion, Shop)](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%203.md)
 
 ## 성적 관리 시스템 (Grade Management System)
 
