@@ -29,7 +29,7 @@
       - `Armor(name, description, weight, value, defense)` : 매개 변수로 아이템 이름/설명/무게/가격/방어력을 받는 생성자
       - `Describe()` : 아이템 정보를 출력하는 함수
 
-### 테스트 코드 (C++)
+### 테스트 코드 예시 (C++)
 ```C++
 int main()
 {
