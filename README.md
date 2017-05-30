@@ -14,6 +14,8 @@
 
 - [Part 1 - 5명의 성적 관리하기 (Manage grade of 5 Students)](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Grade%20Management%20System/Grade%20Management%20System%2C%20Part%201.md)
 
+- [Part 2 - N명의 성적 관리하기 (Manage grade of N Students)](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Grade%20Management%20System/Grade%20Management%20System%2C%20Part%202.md)
+
 ## 풀이 제출 방법
 
 과제를 해결한 뒤 코드를 제출하시면 간단히 코드에 대한 리뷰를 해드립니다.
