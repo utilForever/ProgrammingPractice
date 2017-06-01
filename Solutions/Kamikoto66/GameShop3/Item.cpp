@@ -1,12 +1,9 @@
 #include <iostream>
 #include "Item.h"
 
-Item::Item()
+Item::Item() 
+	:_name(""), _description(""), _weight(0), _value(0)
 {
-	_name = "";
-	_description = "";
-	_weight = 0;
-	_value = 0;
 }
 
 Item::~Item()
