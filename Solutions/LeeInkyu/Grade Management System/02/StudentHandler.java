@@ -9,8 +9,7 @@ public class StudentHandler {
 
 	short koreanScoreSum = 0, mathScoreSum = 0, englishScoreSum = 0;
 
-	public StudentHandler() {
-	}
+	public StudentHandler() {}
 
 
 	public void getRank(Student[] stdPm) //각 학생별 순위 구하기 (배열)
@@ -44,6 +43,10 @@ public class StudentHandler {
 
 	public void printStudentInfo(Student[] stdPm) //학생들 정보 출력하기 (배열)
 	{
+		koreanScoreSum = 0;
+		mathScoreSum = 0;
+		englishScoreSum = 0;
+
 		System.out.printf("%5s %3s %3s %3s %3s %4s %2s\n", "이름", "국어", "수학", "영어", "합계", "평균", "석차");
 		for ( int i = 0; i < stdPm.length; i++ ) {
 			stdPm[i].printInfo();
@@ -58,6 +61,10 @@ public class StudentHandler {
 
 	public void printStudentInfo(ArrayList<Student> stdPm) //학생들 정보 출력하기 (어레이리스트)
 	{
+		koreanScoreSum = 0;
+		mathScoreSum = 0;
+		englishScoreSum = 0;
+
 		System.out.printf("%5s %3s %3s %3s %3s %4s %2s\n", "이름", "국어", "수학", "영어", "합계", "평균", "석차");
 		for ( int i = 0; i < stdPm.size(); i++ ) {
 			stdPm.get(i).printInfo();

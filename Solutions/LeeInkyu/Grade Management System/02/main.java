@@ -10,20 +10,20 @@ public class main {
 
 		ArrayList<Student> studentList = new ArrayList<Student>(); //Student 클래스 어레이리스트 생성
 		StudentHandler studentHandler = new StudentHandler(); //학생 정보 관리 핸들러
-		MenuHandler menuHandler = new MenuHandler(); //메인 메뉴 출력 핸들러
+		MainMenu MainMenu = new MainMenu(); //메인 메뉴 출력 클래스
 
 		char cTmp;
 
 		MAIN_MENU:
 		for ( ; ; ) {
-			cTmp = menuHandler.showMainMenu(); //메인메뉴 출력
+			cTmp = MainMenu.showMainMenu(); //메인메뉴 출력
 
 			switch ( cTmp ) {
 				case '1': //정보 입력
-					menuHandler.inputGrade(studentList);
+					MainMenu.inputGrade(studentList);
 					break;
 				case '2': //정보 출력
-					menuHandler.showStudentInfo(studentList, studentHandler);
+					MainMenu.showStudentInfo(studentList, studentHandler);
 					break;
 				case '3': //프로그램 종료
 					break MAIN_MENU;
