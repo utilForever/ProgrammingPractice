@@ -8,7 +8,7 @@ Shop::~Shop()
 {
 }
 
-Shop::Shop(std::string name, std::list<Item*> items)
+Shop::Shop(std::string name, std::vector<Item*> items)
 	: name(name), items(items)
 {
 }
