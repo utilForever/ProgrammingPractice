@@ -5,15 +5,13 @@ class Item: # python3
         self.weight = weight
         self.value = value
 
-    def Desribe(self):
-        msg = "Name		= " + self.name + "\n"
-        msg += "Description = " + self.description + "\n"
-        msg += "Weight      = " + self.weight + "\n"
-        msg += "Value       = " + self.value + "\n"
+    def describe(self):
+        msg = """Name        = {}\nDescription = {}\nWeight      = {} lbs\nValue       = {} gold coins
+        """.format(self.name, self.description, self.weight, self.value)
         return msg
 
-myItem = Item("Excalibur", "The legendary sword of King Arthur", "12 lbs", "1024 gold coins")
-print (myItem.Desribe())
+myItem = Item("Excalibur", "The legendary sword of King Arthur", 12, 1024)
+print (myItem.describe())
 
-myItem = Item("Steel Armor", "Protective covering made by steel", "15 lbs", "805 gold coins")
-print (myItem.Desribe())
+myItem = Item("Steel Armor", "Protective covering made by steel", 15, 805)
+print (myItem.describe())
