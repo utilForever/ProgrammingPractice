@@ -10,7 +10,7 @@
 
 - [Part 3 - 포션, 상점 만들기 (Make Potion, Shop)](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%203.md)
 
-- [Part 4 - 텍스트 파일에서 아이템 정보 읽어오기 (Read Item Info from Text File)](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%203.md)
+- [Part 4 - 텍스트 파일에서 아이템 정보 읽어오기 (Read Item Info from Text File)](https://github.com/utilForever/ProgrammingPractice/blob/master/Problems/Game%20Shop/Game%20Shop%2C%20Part%204.md)
 
 ## 성적 관리 시스템 (Grade Management System)
 
