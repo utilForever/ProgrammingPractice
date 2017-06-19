@@ -45,4 +45,19 @@ int main()
 			std::cout << "Invalid Number! Try again." << std::endl;
 		}
 	} while (select != 3);
+
+	//deallocate memory
+	std::vector<Item*>::iterator i;
+	for (i = waShopItems.begin(); i != waShopItems.end(); ++i)
+	{
+		delete (*i);
+		*i = 0;
+	}
+	waShopItems.clear();
+	for (i = potionShopItems.begin(); i != potionShopItems.end(); ++i)
+	{
+		delete (*i);
+		*i = 0;
+	}
+	potionShopItems.clear();
 }
