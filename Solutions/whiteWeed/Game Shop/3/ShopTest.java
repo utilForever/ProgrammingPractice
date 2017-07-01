@@ -42,11 +42,14 @@ public class ShopTest {
 	private static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		select();
+		boolean end = true;
+		while(end) {
+			end = select();
+		}
 		sc.close();
 	}
 	
-	public static void select(){
+	public static boolean select(){
 		System.out.println("- Shop Select -");
 		System.out.println("   1. Weapon/Armor Shop");
 		System.out.println("   2. Potion Shop");
@@ -54,22 +57,16 @@ public class ShopTest {
 		System.out.println();
 		System.out.println("Select : ");
 		int selection = sc.nextInt();
+		sc.reset();
 		
-		switch(selection){
-		case 1:
-			shops[0].showItemList();
-			select();
-			break;
-		case 2:
-			shops[1].showItemList();
-			select();
-			break;
-		case 3:
-			break;
-		default:
+		if(selection > 3 || selection <= 0){
 			System.out.println("Invalid number! Try again.");
-			select();
-			break;
+			return true;
 		}
+		else if(selection <= 2){
+			shops[selection - 1].showItemList();
+			return true;
+		}
+		return false;
 	}
 }

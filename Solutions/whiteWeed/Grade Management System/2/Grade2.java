@@ -20,6 +20,7 @@ public class Grade2 {
 	private short sum = 0, rank;
 	private float average;
 	protected byte[] score;
+	public static byte[] scoreSum = {0, 0, 0, 0};
 	public static int studentCnt = 0;
 	
 	public Grade2(String name, byte[] score, short sum, float average){
@@ -28,6 +29,10 @@ public class Grade2 {
 		this.sum = sum;
 		this.average = average;
 		studentCnt++;
+		for(int i = 0; i < 3; i++){
+			scoreSum[i] += score[i];
+		}
+		scoreSum[3] += sum;
 	}
 	
 	public short getSum(){
