@@ -46,8 +46,8 @@ int main()
 	// Print Information
 	printLine(students);
 
-	delete students;
-
+	delete[] students;
+	student = NULL;
 	return 0;
 }
 
