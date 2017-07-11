@@ -21,6 +21,6 @@ void Potion::Describe()
 {
 	Item::Describe();
 	cout << "Type = " << _type.c_str() << endl;
-	cout << "Capacity = " << _capacity << endl;
+	cout << "Capacituy = " << _capacity << endl;
 	cout << endl;
 }
