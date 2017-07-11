@@ -18,12 +18,12 @@ class Potion;
 class Shop;
 class ShopManager;
 
-using ItemPtr = shared_ptr<Item>;
-using WeaponPtr = shared_ptr<Weapon>;
-using ArmorPtr = shared_ptr<Armor>;
-using PotionPtr = shared_ptr<Potion>;
-using ShopPtr = shared_ptr<Shop>;
-using ShopManagerPtr = shared_ptr<ShopManager>;
+using ItemPtr = unique_ptr<Item>;
+using WeaponPtr = unique_ptr<Weapon>;
+using ArmorPtr = unique_ptr<Armor>;
+using PotionPtr = unique_ptr<Potion>;
+using ShopPtr = unique_ptr<Shop>;
+using ShopManagerPtr = unique_ptr<ShopManager>;
 
 class Item
 {
@@ -89,7 +89,7 @@ class Weapon : public Item
 public:
 	static ItemPtr MakeInstance(const string& name, const string& description, const int weight, const int value, const int damage)
 	{
-		return make_shared<Weapon>(name, description, weight, value, damage);
+		return make_unique<Weapon>(name, description, weight, value, damage);
 	}
 
 	Weapon(const string& name, const string& description, const int weight, const int value, const int damage)
@@ -120,7 +120,7 @@ class Armor : public Item
 public:
 	static ItemPtr MakeInstance(const string& name, const string& description, const int weight, const int value, const int defense)
 	{
-		return make_shared<Armor>(name, description, weight, value, defense);
+		return make_unique<Armor>(name, description, weight, value, defense);
 	}
 
 	Armor(const string& name, const string& description, const int weight, const int value, const int defense)
@@ -159,7 +159,7 @@ public:
 
 	static ItemPtr MakeInstance(const string& name, const string& description, const int weight, const int value, const Type type, const int capacity)
 	{
-		return make_shared<Potion>(name, description, weight, value, type, capacity);
+		return make_unique<Potion>(name, description, weight, value, type, capacity);
 	}
 
 	Potion(const string& name, const string& description, const int weight, const int value, const Type type, const int capacity)
@@ -202,21 +202,21 @@ const unordered_map<string, Potion::Type> Potion::string_to_type{
 	make_pair("Mana", Potion::Type::MP)
 };
 
-class Shop : public enable_shared_from_this<Shop>
+class Shop
 {
 public:
-	static ShopPtr MakeInstance(const string& name = "", vector<ItemPtr> items = vector<ItemPtr>())
+	static ShopPtr MakeInstance(const string& name, vector<ItemPtr>&& items)
 	{
-		return make_shared<Shop>(name, items);
+		return make_unique<Shop>(name, move(items));
 	}
 
 	static ShopPtr MakeInstance(const string& name, const string& file_name)
 	{
-		return make_shared<Shop>(name, file_name);
+		return make_unique<Shop>(name, file_name);
 	}
 
-	Shop(const string& name = "", vector<ItemPtr> items = vector<ItemPtr>())
-		: name(name), items(items)
+	Shop(const string& name, vector<ItemPtr>&& items)
+		: name(name), items(move(items))
 	{
 
 	}
@@ -232,26 +232,17 @@ public:
 			while (!istrm.eof())
 			{
 				ItemPtr item;
-				istrm >> item;
-				items.push_back(item);
+				istrm >> item;	// operator>>를 오버로딩하여 입력처리 부분을 모듈화 함
+				items.emplace_back(move(item));
 			}
 		}
 	}
 
-	// Shop 인스턴스 생성 시 아이템 정보를 파일에서 가져오는 것이 낫다고 판단하였습니다.
-	// Shop 클래스가 파일스트림 어트리뷰트를 가지고 있을 필요가 없다고 생각하여, 이 클래스 또한 작성하지 않았습니다.
-	// 대신 operation>>()를 재정의하여 파일로부터 아이템 정보를 입력받았습니다.
-	//ReadDataFromFile(void);
-
-	// 소멸자에 파일 스트림을 닫는 요구사항이 있었는데, 스트림 클래스의 소멸자에서 자동으로 닫는 것으로 알고 있어서 작성하지 않았습니다.
-	// 그리고, 생성자에서 예외를 발생시키면 소멸자 호출이 안되는 것으로 알고 있기 때문에 여기에 스트림을 닫아봤자 효과가 없을 것 같다는 생각을 했습니다.
 	virtual ~Shop() = default;
 
-	ShopPtr PushBack(ItemPtr item)
+	void EmplaceBack(ItemPtr&& item)
 	{
-		items.push_back(item);
-
-		return shared_from_this();
+		items.emplace_back(move(item));
 	}
 
 	void ShowItemList(void) const
@@ -275,19 +266,17 @@ private:
 	vector<ItemPtr> items;
 };
 
-class ShopManager : public enable_shared_from_this<ShopManager>
+class ShopManager
 {
 public:
 	static ShopManagerPtr MakeInstance(void)
 	{
-		return make_shared<ShopManager>();
+		return make_unique<ShopManager>();
 	}
 
-	ShopManagerPtr PushBack(ShopPtr shop)
+	void EmplaceBack(ShopPtr&& shop)
 	{
-		shop_list.push_back(shop);
-
-		return shared_from_this();
+		shop_list.emplace_back(move(shop));
 	}
 
 	template<typename F>
@@ -328,7 +317,7 @@ ShopManagerPtr InitShopManager(void)
 	try
 	{
 		for (const auto& shop_information : shops_information)
-			shop_manager->PushBack(Shop::MakeInstance(shop_information.first, shop_information.second));
+			shop_manager->EmplaceBack(Shop::MakeInstance(shop_information.first, shop_information.second));
 	}
 	catch (const exception& e)
 	{
@@ -385,17 +374,17 @@ class MyGame
 public:
 	MyGame() = default;
 
-	MyGame(ShopManagerPtr shop_manager)
-		: shop_manager(shop_manager)
+	MyGame(ShopManagerPtr&& shop_manager)
+		: shop_manager(move(shop_manager))
 	{
 
 	}
 
 	~MyGame() = default;
 
-	void SetShopManager(ShopManagerPtr shop_manager)
+	void SetShopManager(ShopManagerPtr&& shop_manager)
 	{
-		this->shop_manager = shop_manager;
+		this->shop_manager = move(shop_manager);
 	}
 
 	int Play(void) const
