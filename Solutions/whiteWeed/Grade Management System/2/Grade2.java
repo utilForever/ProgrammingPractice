@@ -15,7 +15,7 @@ package whiteWeed.gradeManage;
  * @author				:  Weed
  * @version				:  1.0
  */
-public class Grade2 {
+public class Grade2 { //ㅁㄴㅇㄹ
 	private String name;
 	private short sum = 0, rank;
 	private float average;

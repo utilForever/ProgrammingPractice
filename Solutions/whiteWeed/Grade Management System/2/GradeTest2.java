@@ -17,7 +17,7 @@ import java.util.*;
  * @author				:  Weed
  * @version				:  1.0
  */
-public class GradeTest2 {
+public class GradeTest2 { //ㅁㄴㅇㄹ
 	
 	private static Scanner sc = new Scanner(System.in);
 	private static List<Grade2> gradeArray = new ArrayList<Grade2>();
