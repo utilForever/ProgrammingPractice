@@ -18,7 +18,7 @@ import java.util.*;
  * @author				:  Weed
  * @version				:  1.0
  */
-public class Shop {
+public class Shop { //ㅁㄴㅇㄹ
 	String name;
 	Item[] itemsArray;
 	List<String> strList = new ArrayList<String>();

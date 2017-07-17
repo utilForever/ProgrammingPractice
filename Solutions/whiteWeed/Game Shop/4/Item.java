@@ -15,7 +15,7 @@ package whiteWeed.gameShop;
  * @author				:  Weed
  * @version				:  1.0
  */
-public class Item {
+public class Item { //ㅁㄴㅇㄹ
 	protected String name, description;
 	protected int weight, value;
 	

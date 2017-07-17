@@ -17,7 +17,7 @@ import java.util.Scanner;
  * @author				:  Weed
  * @version				:  1.0
  */
-public class ShopTest2 {
+public class ShopTest2 { //ㅁㄴㅇㄹ
 	private static Shop[] shops = {
 			new Shop("Weapon/Armor", "equip_item.txt"),
 			new Shop("Potion", "potion_item.txt")

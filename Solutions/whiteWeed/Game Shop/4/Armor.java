@@ -15,7 +15,7 @@ package whiteWeed.gameShop;
  * @author				:  Weed
  * @version				:  1.0
  */
-public class Armor extends Item {
+public class Armor extends Item { //ㅁㄴㅇㄹ
 	private int defence;
 	
 	public Armor(String name, String description, int weight, int value, int defence){

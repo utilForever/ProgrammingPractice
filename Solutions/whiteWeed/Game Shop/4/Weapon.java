@@ -16,7 +16,7 @@ package whiteWeed.gameShop;
  * @version				:  1.0
  */
 public class Weapon extends Item {
-	private int damage;
+	private int damage; //ㅁㄴㅇㄹ
 	
 	public Weapon(String name, String description, int weight, int value, int damage){
 		super(name, description, weight, value);

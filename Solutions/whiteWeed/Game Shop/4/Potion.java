@@ -15,7 +15,7 @@ package whiteWeed.gameShop;
  * @author				:  Weed
  * @version				:  1.0
  */
-public class Potion extends Item {
+public class Potion extends Item { //ㅁㄴㅇㄹ
 	String type;
 	int capacity;
 	
