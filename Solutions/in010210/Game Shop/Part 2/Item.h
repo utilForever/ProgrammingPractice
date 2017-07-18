@@ -23,7 +23,7 @@ private:
 	int damage;
 public:
 	Weapon(string name, string description, int weight, int value, int damage);
-	virtual void Describe();
+	virtual void Describe() override;
 };
 
 class Armor :public Item
@@ -32,5 +32,5 @@ private:
 	int defense;
 public:
 	Armor(string name, string description, int weight, int value, int defense);
-	virtual void Describe();
+	virtual void Describe() override;
 };
